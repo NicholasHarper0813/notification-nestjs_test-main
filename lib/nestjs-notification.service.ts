@@ -3,12 +3,14 @@ import { Injectable, Type } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 
 @Injectable()
-export class NestjsNotificationService {
+export class NestjsNotificationService 
+{
   private resolveChannel = (channel: Type<INestjsNotificationChannel>) =>
     this.moduleRef.create(channel);
 
   constructor(private moduleRef: ModuleRef) {}
-  public send(notification: NestJsNotification): Promise<any> {
+  public send(notification: NestJsNotification): Promise<any> 
+  {
     const channels = notification.sendToChannels();
 
     return Promise.all(
