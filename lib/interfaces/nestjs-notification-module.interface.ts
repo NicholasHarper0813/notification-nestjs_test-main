@@ -1,12 +1,14 @@
 import { ModuleMetadata, Provider, Type } from '@nestjs/common';
 
-export interface NestjsNotificationModuleOptionsFactory {
+export interface NestjsNotificationModuleOptionsFactory 
+{
   createNestjsNotificationOptions():
     | Promise<NestjsNotificationModuleOptions>
     | NestjsNotificationModuleOptions;
 }
 
-export interface NestjsNotificationModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
+export interface NestjsNotificationModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> 
+{
   useExisting?: Type<NestjsNotificationModuleOptionsFactory>;
   useClass?: Type<NestjsNotificationModuleOptionsFactory>;
   useFactory?: (
