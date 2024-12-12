@@ -9,38 +9,31 @@ import { NESTJS_NOTIFICATION_OPTIONS } from './constants';
 
 @Module({})
 export class NestjsNotificationModule {
-  /**
-   * Register module
-   * @static
-   * @param {NestjsNotificationModuleOptions} options
-   * @return DynamicModule
-   */
-  static register(options: NestjsNotificationModuleOptions): DynamicModule {
+  static register(options: NestjsNotificationModuleOptions): DynamicModule 
+  {
     const notifyProvider: ValueProvider = {
       provide: NESTJS_NOTIFICATION_OPTIONS,
       useValue: options,
     };
 
-    return {
+    return 
+    {
       module: NestjsNotificationModule,
       providers: [NestjsNotificationService, notifyProvider],
       exports: [NestjsNotificationService, notifyProvider],
     };
   }
 
-  /**
-   * Register async
-   * @static
-   * @param {NestjsNotificationModuleAsyncOptions} options
-   * @return DynamicModule
-   */
-  static registerAsync(options: NestjsNotificationModuleAsyncOptions): DynamicModule {
-    const notifyProvider: ValueProvider = {
+  static registerAsync(options: NestjsNotificationModuleAsyncOptions): DynamicModule
+  {
+    const notifyProvider: ValueProvider = 
+    {
       provide: NESTJS_NOTIFICATION_OPTIONS,
       useValue: options,
     };
 
-    return {
+    return 
+    {
       module: NestjsNotificationModule,
       imports: options.imports || [],
       providers: [NestjsNotificationService, notifyProvider, ...this.createAsyncProviders(options)],
@@ -48,16 +41,13 @@ export class NestjsNotificationModule {
     };
   }
 
-  /**
-   * Create async providers
-   * @private
-   * @param {NestjsNotificationModuleAsyncOptions} options
-   * @return Provider[]
-   */
   private static createAsyncProviders(options: NestjsNotificationModuleAsyncOptions): Provider[] {
-    if (options.useExisting || options.useFactory) {
+    if (options.useExisting || options.useFactory) 
+    {
       return [this.createAsyncConfigProvider(options)];
-    } else if (!options.useClass) {
+    } 
+    else if (!options.useClass) 
+    {
       return [
         {
           provide: NESTJS_NOTIFICATION_OPTIONS,
@@ -76,17 +66,13 @@ export class NestjsNotificationModule {
     ];
   }
 
-  /**
-   * Create async config provider
-   * @private
-   * @param {NestjsNotificationModuleAsyncOptions} options
-   * @return Provider<any>
-   */
   private static createAsyncConfigProvider(
     options: NestjsNotificationModuleAsyncOptions,
   ): Provider<any> {
-    if (options.useFactory) {
-      return {
+    if (options.useFactory) 
+    {
+      return 
+      {
         provide: NESTJS_NOTIFICATION_OPTIONS,
         useFactory: options.useFactory,
         inject: options.inject || [],
@@ -95,11 +81,13 @@ export class NestjsNotificationModule {
 
     const inject = options.useClass || options.useExisting;
 
-    if (!inject) {
-      throw new Error('Invalid configuration. Must provide useFactory, useClass or useExisting');
+    if (!inject) 
+    {
+      throw new Error('Invalid configuration.');
     }
 
-    return {
+    return 
+    {
       provide: NESTJS_NOTIFICATION_OPTIONS,
       async useFactory(
         optionsFactory: NestjsNotificationModuleOptionsFactory,
